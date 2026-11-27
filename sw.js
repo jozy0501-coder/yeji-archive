@@ -1,5 +1,5 @@
 /* My Archive service worker — offline shell with network-first pages. */
-const CACHE = 'my-archive-v1';
+const CACHE = 'my-archive-v2';
 const SHELL = [
   './',
   './index.html',
