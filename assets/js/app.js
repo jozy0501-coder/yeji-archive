@@ -212,8 +212,17 @@
     el.grid.appendChild(frag);
 
     var total = allItems().length;
-    if (filters.q || filters.cat !== '전체' || filters.src !== 'all') {
+    if (filters.q) {
       el.countText.innerHTML = '검색 결과 <span class="num">' + list.length + '</span>개';
+    } else if (filters.cat !== '전체' || filters.src !== 'all') {
+      var parts = [];
+      if (filters.cat !== '전체') parts.push(filters.cat);
+      if (filters.src !== 'all') {
+        for (var k = 0; k < SOURCES.length; k++) {
+          if (SOURCES[k].key === filters.src) parts.push(SOURCES[k].label.replace(' ★', ''));
+        }
+      }
+      el.countText.innerHTML = parts.join(' · ') + ' · <span class="num">' + list.length + '</span>개';
     } else {
       el.countText.innerHTML = '<span class="num">' + total + '</span>개의 기록';
     }
@@ -240,9 +249,9 @@
       img.alt = it.title;
       thumb.appendChild(img);
     } else {
-      var ph = document.createElement('span');
-      ph.textContent = (it.category || '·').slice(0, 1);
-      thumb.appendChild(ph);
+      thumb.insertAdjacentHTML('beforeend',
+        '<svg class="ph-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/>' +
+        '<circle cx="9" cy="10.5" r="1.4"/><path d="M5.6 17l4.4-4.4 3.4 3.4 2.1-2.1 2.9 2.9"/></svg>');
     }
     var badge = document.createElement('span');
     badge.className = 'badge';
