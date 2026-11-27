@@ -1,10 +1,10 @@
 /* Archive — offline shell. Pages come from the network first, assets from cache. */
-const CACHE = 'my-archive-v2-1';
+const CACHE = 'my-archive-v2-2';
 const SHELL = [
   './',
   './index.html',
-  './assets/css/style.css?v=4',
-  './assets/js/app.js?v=4',
+  './assets/css/style.css?v=5',
+  './assets/js/app.js?v=5',
   './manifest.json',
   './assets/icon-192.png',
   './assets/icon-512.png',

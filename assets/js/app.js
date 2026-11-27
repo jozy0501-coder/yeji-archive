@@ -100,6 +100,35 @@
   var confirmRun = null;
   var toastTimer = null;
   var installEvent = null;
+  var shareFlow = false;
+
+  /* ------------------------------------------------------------------ *
+   * github sync — the private repo holds the same list for Safari and the
+   * home-screen app. Local IndexedDB stays the source of truth on device;
+   * the remote file is merged in, newest updatedAt wins, deletes travel as
+   * tombstones so a removed item does not come back from the other device.
+   * ------------------------------------------------------------------ */
+
+  var GH_API = 'https://api.github.com';
+  var GH_DEFAULT_REPO = 'jozy0501-coder/Test-';
+  var GH_PATH = 'archive-data.json';
+  var GH_BRANCH = 'main';
+  var GH_LS_TOKEN = 'gh_token';
+  var GH_LS_REPO = 'gh_repo';
+  var GH_LS_DEL = 'yejiArchive:v3:deleted';
+  var GH_MAX_BYTES = 8 * 1024 * 1024;
+
+  var ghToken = '';
+  var ghRepo = GH_DEFAULT_REPO;
+  var ghSha = null;
+  var ghState = 'off'; /* off | syncing | ok | error */
+  var ghError = '';
+  var ghAuthFail = false;
+  var ghLastSync = null;
+  var ghSyncing = null;
+  var ghPending = false;
+  var ghLastResume = 0;
+  var deleted = {};
 
   function $(id) { return document.getElementById(id); }
 
@@ -578,6 +607,7 @@
       closeSheet('formSheet');
       render();
       toast('수정했어요');
+      ghTouch();
       return;
     }
 
@@ -591,7 +621,13 @@
     tab = 'inbox';
     if (q) { q = ''; $('searchInput').value = ''; }
     render();
-    toast('인박스에 추가했어요');
+    if (shareFlow && !ghToken) {
+      toast('인박스에 추가했어요', '동기화 켜기', openSyncSheet);
+    } else {
+      toast('인박스에 추가했어요');
+    }
+    shareFlow = false;
+    ghTouch();
   }
 
   /* ------------------------------------------------------------------ *
@@ -620,11 +656,13 @@
     it.status = 'done';
     it.savedTo = { key: key, label: label };
     it.completedAt = new Date().toISOString();
+    it.updatedAt = it.completedAt;
     persist(it);
     closeSheet('saveSheet');
     tab = 'done';
     render();
     toast('‘' + label + '’에 저장 완료로 옮겼어요');
+    ghTouch();
   }
 
   function returnToInbox(id) {
@@ -633,10 +671,12 @@
     it.status = 'inbox';
     it.savedTo = null;
     it.completedAt = null;
+    it.updatedAt = new Date().toISOString();
     persist(it);
     tab = 'inbox';
     render();
     toast('대기 중으로 되돌렸어요');
+    ghTouch();
   }
 
   /* ------------------------------------------------------------------ *
@@ -650,12 +690,17 @@
     var removed = items[idx];
     items.splice(idx, 1);
     persistRemove(id);
+    markDeleted(id, stampOf(removed) > new Date().toISOString() ? stampOf(removed) : new Date().toISOString());
     render();
     toast('삭제했어요', '실행 취소', function () {
+      unmarkDeleted(id);
+      removed.updatedAt = new Date().toISOString();
       items.splice(Math.min(idx, items.length), 0, removed);
       persist(removed);
       render();
+      ghTouch();
     });
+    ghTouch();
   }
 
   /* ------------------------------------------------------------------ *
@@ -718,6 +763,7 @@
       var arr = Array.isArray(data) ? data : (data && data.items);
       if (!Array.isArray(arr)) { toast('백업 파일 형식이 아니에요'); return; }
       var added = 0, updated = 0;
+      var now = new Date().toISOString();
       arr.forEach(function (raw) {
         var it = normalizeItem(raw);
         if (!it) return;
@@ -726,9 +772,13 @@
           ex.url = it.url; ex.title = it.title; ex.note = it.note; ex.tags = it.tags;
           ex.photo = it.photo || ex.photo; ex.status = it.status; ex.savedTo = it.savedTo;
           ex.completedAt = it.completedAt; ex.createdAt = it.createdAt;
+          ex.updatedAt = now;
+          unmarkDeleted(ex.id);
           persist(ex);
           updated++;
         } else {
+          it.updatedAt = now;
+          unmarkDeleted(it.id);
           items.push(it);
           persist(it);
           added++;
@@ -736,7 +786,532 @@
       });
       render();
       toast(added + '개 추가 · ' + updated + '개 갱신했어요');
+      ghTouch();
     }).catch(function () { toast('백업 파일을 읽을 수 없어요'); });
+  }
+
+  /* ------------------------------------------------------------------ *
+   * github sync
+   * ------------------------------------------------------------------ */
+
+  function mkErr(msg, status) {
+    var e = new Error(msg);
+    if (status) e.status = status;
+    return e;
+  }
+
+  function stampOf(it) {
+    return (it && (it.updatedAt || it.completedAt || it.createdAt)) || '';
+  }
+
+  function fmtClock(iso) {
+    var d = new Date(iso);
+    if (isNaN(d.getTime())) return '';
+    return pad(d.getHours()) + ':' + pad(d.getMinutes());
+  }
+
+  function readDeleted() {
+    try {
+      var raw = localStorage.getItem(GH_LS_DEL);
+      var obj = raw ? JSON.parse(raw) : {};
+      return obj && typeof obj === 'object' && !Array.isArray(obj) ? obj : {};
+    } catch (e) { return {}; }
+  }
+
+  function writeDeleted() {
+    try { localStorage.setItem(GH_LS_DEL, JSON.stringify(deleted)); } catch (e) {}
+  }
+
+  function markDeleted(id, ts) {
+    var t = ts || new Date().toISOString();
+    if (!deleted[id] || deleted[id] < t) deleted[id] = t;
+    writeDeleted();
+  }
+
+  function unmarkDeleted(id) {
+    if (!deleted[id]) return;
+    delete deleted[id];
+    writeDeleted();
+  }
+
+  function loadSyncSettings() {
+    try { ghToken = String(localStorage.getItem(GH_LS_TOKEN) || '').trim(); } catch (e) { ghToken = ''; }
+    try {
+      var r = String(localStorage.getItem(GH_LS_REPO) || '').trim();
+      ghRepo = /^[A-Za-z0-9._-]+\/[A-Za-z0-9._-]+$/.test(r) ? r : ghRepo;
+    } catch (e) {}
+    deleted = readDeleted();
+    if (ghToken) ghState = 'ok';
+  }
+
+  function saveSyncSettings() {
+    try {
+      localStorage.setItem(GH_LS_TOKEN, ghToken);
+      localStorage.setItem(GH_LS_REPO, ghRepo);
+    } catch (e) {}
+  }
+
+  function ghHeaders(token, accept) {
+    return {
+      'Authorization': 'Bearer ' + (token || ghToken),
+      'Accept': accept || 'application/vnd.github+json',
+      'X-GitHub-Api-Version': '2022-11-28'
+    };
+  }
+
+  function b64utf8(text) {
+    var bytes = new TextEncoder().encode(text);
+    var bin = '';
+    for (var i = 0; i < bytes.length; i += 0x8000) {
+      bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+    }
+    return btoa(bin);
+  }
+
+  function unb64utf8(b64) {
+    var bin = atob(String(b64).replace(/\s+/g, ''));
+    var bytes = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    return new TextDecoder().decode(bytes);
+  }
+
+  function mb(bytes) {
+    return (Math.round(bytes / 1024 / 102.4) / 10) + 'MB';
+  }
+
+  function apiErr(status, text) {
+    var msg = '';
+    try { msg = (JSON.parse(text) || {}).message || ''; } catch (e) {}
+    if (status === 401) return mkErr('토큰이 올바르지 않아요 (401)', 401);
+    if (status === 403) return mkErr('권한이 부족해요 (403) — 토큰에 이 저장소의 Contents 쓰기 권한이 필요해요', 403);
+    if (status === 404) return mkErr('저장소를 찾을 수 없어요 (404) — 이름과 권한을 확인해 주세요', 404);
+    if (status === 409 || status === 422) return mkErr('동기화가 겹쳤어요 (' + status + ')', status);
+    return mkErr('GitHub 응답 오류 (' + status + ')' + (msg ? ' · ' + msg : ''), status);
+  }
+
+  /* --- merge --- */
+
+  function stateSig(state) {
+    var itemsSig = [];
+    var delSig = [];
+    var list = (state && state.items) || [];
+    for (var i = 0; i < list.length; i++) itemsSig.push(list[i].id + '@' + stampOf(list[i]));
+    itemsSig.sort();
+    var del = (state && state.deleted) || {};
+    for (var k in del) {
+      if (Object.prototype.hasOwnProperty.call(del, k)) delSig.push(k + '@' + del[k]);
+    }
+    delSig.sort();
+    return itemsSig.join(',') + '|' + delSig.join(',');
+  }
+
+  function mergeState(localItems, localDel, remote) {
+    var localMap = {};
+    var remoteMap = {};
+    var i, id;
+
+    for (i = 0; i < localItems.length; i++) localMap[localItems[i].id] = localItems[i];
+    var rItems = (remote && remote.items) || [];
+    for (i = 0; i < rItems.length; i++) remoteMap[rItems[i].id] = rItems[i];
+
+    var del = {};
+    function take(src) {
+      if (!src || typeof src !== 'object') return;
+      for (var k in src) {
+        if (!Object.prototype.hasOwnProperty.call(src, k)) continue;
+        var v = String(src[k] || '');
+        if (!del[k] || v > del[k]) del[k] = v;
+      }
+    }
+    take(localDel);
+    take(remote && remote.deleted);
+
+    var ids = {};
+    for (id in localMap) ids[id] = 1;
+    for (id in remoteMap) ids[id] = 1;
+
+    var out = [];
+    for (id in ids) {
+      var L = localMap[id];
+      var R = remoteMap[id];
+      var pick = null;
+      if (L && R) pick = stampOf(R) > stampOf(L) ? R : L;
+      else pick = L || R || null;
+      var t = del[id];
+      if (pick && t) {
+        if (stampOf(pick) > t) delete del[id];
+        else pick = null;
+      }
+      if (pick) out.push(pick);
+    }
+    return { items: out, deleted: del };
+  }
+
+  function cleanItem(it) {
+    return {
+      id: it.id,
+      url: it.url || '',
+      title: it.title || '',
+      note: it.note || '',
+      tags: it.tags || [],
+      photo: it.photo || '',
+      status: it.status === 'done' ? 'done' : 'inbox',
+      savedTo: it.savedTo || null,
+      createdAt: it.createdAt || null,
+      completedAt: it.completedAt || null,
+      updatedAt: stampOf(it) || null
+    };
+  }
+
+  function pruneTombstones(map) {
+    var cut = Date.now() - 365 * 24 * 3600 * 1000;
+    var out = {};
+    for (var k in map) {
+      if (!Object.prototype.hasOwnProperty.call(map, k)) continue;
+      var t = Date.parse(map[k]);
+      if (isNaN(t) || t >= cut) out[k] = map[k];
+    }
+    return out;
+  }
+
+  function buildPayload(state) {
+    return {
+      app: 'yeji-archive',
+      schema: 3,
+      updatedAt: new Date().toISOString(),
+      items: ((state && state.items) || []).map(cleanItem),
+      deleted: pruneTombstones((state && state.deleted) || {})
+    };
+  }
+
+  function applyMerged(merged) {
+    var before = stateSig({ items: items, deleted: deleted });
+    var after = stateSig(merged);
+    if (before === after) return false;
+
+    var prev = {};
+    items.forEach(function (it) { prev[it.id] = it; });
+    var next = merged.items.slice();
+    var keep = {};
+    next.forEach(function (it) { keep[it.id] = 1; });
+
+    items = next;
+    deleted = merged.deleted || {};
+    writeDeleted();
+
+    if (idbOk) {
+      next.forEach(function (it) {
+        var old = prev[it.id];
+        if (!old || stampOf(old) !== stampOf(it)) idbPut(it);
+      });
+      Object.keys(prev).forEach(function (id) { if (!keep[id]) idbDel(id); });
+    } else {
+      lsSet(items);
+    }
+    return true;
+  }
+
+  /* --- remote --- */
+
+  function parseRemote(text) {
+    var data = null;
+    try { data = JSON.parse(text); } catch (e) { throw mkErr('원격 파일 형식이 올바르지 않아요'); }
+    if (!data || typeof data !== 'object') throw mkErr('원격 파일 형식이 올바르지 않아요');
+
+    var arr = Array.isArray(data) ? data : (Array.isArray(data.items) ? data.items : []);
+    var del = (!Array.isArray(data) && data.deleted && typeof data.deleted === 'object') ? data.deleted : {};
+    var out = [];
+
+    arr.forEach(function (raw) {
+      if (!raw || typeof raw !== 'object') return;
+      if (raw.deleted === true) {
+        var ts = String(raw.updatedAt || raw.deletedAt || raw.createdAt || '');
+        if (raw.id && ts && (!del[String(raw.id)] || del[String(raw.id)] < ts)) del[String(raw.id)] = ts;
+        return;
+      }
+      var it = normalizeItem(raw);
+      if (it) out.push(it);
+    });
+
+    return {
+      exists: true,
+      items: out,
+      deleted: del,
+      updatedAt: data.updatedAt || null
+    };
+  }
+
+  function ghGetRemote() {
+    var url = GH_API + '/repos/' + ghRepo + '/contents/' + GH_PATH + '?ref=' + GH_BRANCH;
+    return fetch(url, { headers: ghHeaders(), cache: 'no-store' }).then(function (res) {
+      if (res.status === 404) { ghSha = null; return { exists: false, items: [], deleted: {} }; }
+      if (!res.ok) return res.text().then(function (t) { throw apiErr(res.status, t); });
+      return res.json().then(function (file) {
+        ghSha = (file && file.sha) ? file.sha : null;
+        if (file && file.content && file.encoding === 'base64') return parseRemote(unb64utf8(file.content));
+        // files over 1MB come back without inline content
+        return fetch(url, { headers: ghHeaders(null, 'application/vnd.github.raw'), cache: 'no-store' })
+          .then(function (r) {
+            if (!r.ok) throw mkErr('원격 파일을 읽지 못했어요 (' + r.status + ')', r.status);
+            return r.text();
+          })
+          .then(parseRemote);
+      });
+    });
+  }
+
+  function ghPutRemote(merged, attempt) {
+    var text = JSON.stringify(buildPayload(merged));
+    var bytes = new TextEncoder().encode(text).length;
+    if (bytes > GH_MAX_BYTES) {
+      return Promise.reject(mkErr('데이터가 너무 커서 동기화하지 못했어요 (' + mb(bytes) + ') · 사진을 줄여 주세요'));
+    }
+    var body = {
+      message: 'Archive sync ' + new Date().toISOString().slice(0, 16).replace('T', ' '),
+      content: b64utf8(text),
+      branch: GH_BRANCH
+    };
+    if (ghSha) body.sha = ghSha;
+
+    return fetch(GH_API + '/repos/' + ghRepo + '/contents/' + GH_PATH, {
+      method: 'PUT',
+      headers: Object.assign({ 'Content-Type': 'application/json' }, ghHeaders()),
+      cache: 'no-store',
+      body: JSON.stringify(body)
+    }).then(function (res) {
+      if (res.ok) {
+        return res.json().then(function (j) {
+          if (j && j.content && j.content.sha) ghSha = j.content.sha;
+        });
+      }
+      if (res.status === 409 || res.status === 422) {
+        if (attempt >= 3) return res.text().then(function (t) { throw apiErr(res.status, t); });
+        return ghGetRemote().then(function (remote) {
+          var again = mergeState(items, deleted, remote);
+          if (applyMerged(again)) render();
+          return ghPutRemote(again, attempt + 1);
+        });
+      }
+      return res.text().then(function (t) { throw apiErr(res.status, t); });
+    });
+  }
+
+  /* --- sync run --- */
+
+  function ghSync() {
+    if (!ghToken) return Promise.resolve();
+    if (ghSyncing) { ghPending = true; return ghSyncing; }
+    ghState = 'syncing';
+    flushSyncUI();
+
+    ghSyncing = ghGetRemote()
+      .then(function (remote) {
+        var merged = mergeState(items, deleted, remote);
+        if (applyMerged(merged)) render();
+        var remoteSig = stateSig({ items: remote.items || [], deleted: remote.deleted || {} });
+        var mergedSig = stateSig(merged);
+        if (!remote.exists || mergedSig !== remoteSig) return ghPutRemote(merged, 0);
+      })
+      .then(function () {
+        ghState = 'ok';
+        ghError = '';
+        ghAuthFail = false;
+        ghLastSync = new Date().toISOString();
+      })
+      .catch(function (err) {
+        ghState = 'error';
+        ghError = (err && err.message) ? err.message : '동기화하지 못했어요';
+        if (err && (err.status === 401 || err.status === 403)) ghAuthFail = true;
+      })
+      .then(function () {
+        ghSyncing = null;
+        flushSyncUI();
+      });
+
+    return ghSyncing;
+  }
+
+  function ghRequestSync() {
+    if (!ghToken || ghAuthFail) return;
+    if (ghSyncing) { ghPending = true; return; }
+    ghSync().then(function () {
+      if (ghPending) { ghPending = false; ghRequestSync(); }
+    });
+  }
+
+  function ghResume() {
+    if (!ghToken || document.hidden) return;
+    var now = Date.now();
+    if (now - ghLastResume < 4000) return;
+    ghLastResume = now;
+    ghRequestSync();
+  }
+
+  function ghTouch() {
+    if (!ghToken) return;
+    ghRequestSync();
+  }
+
+  /* --- settings sheet --- */
+
+  function setGhMsg(msg, kind) {
+    var el = $('ghMsg');
+    if (!el) return;
+    if (!msg) { el.hidden = true; el.textContent = ''; el.classList.remove('ok'); return; }
+    el.hidden = false;
+    el.textContent = msg;
+    el.classList.toggle('ok', kind === 'ok');
+  }
+
+  function flushSyncUI() {
+    var pill = $('syncPill');
+    var txt = $('syncText');
+    if (!pill || !txt) return;
+    pill.classList.remove('on', 'busy', 'err');
+    var label = '로컬 전용';
+    if (ghToken) {
+      if (ghSyncing || ghState === 'syncing') { pill.classList.add('busy'); label = '동기화 중'; }
+      else if (ghState === 'error') { pill.classList.add('err'); label = '동기화 오류'; }
+      else { pill.classList.add('on'); label = '동기화됨'; }
+    }
+    txt.textContent = label;
+    pill.setAttribute('aria-label', 'GitHub 동기화 · ' + label);
+
+    var foot = $('foot');
+    if (foot) foot.textContent = ghToken ? '이 기기와 GitHub 비공개 저장소에 함께 저장됩니다' : '모든 기록은 이 기기에만 저장됩니다';
+
+    refreshSyncSheet();
+  }
+
+  function refreshSyncSheet() {
+    var off = $('ghOff');
+    if (!off) return;
+    off.hidden = !ghToken;
+    var st = $('ghStat');
+    var tx = $('ghStatText');
+    st.classList.remove('on', 'busy', 'err');
+    if (!ghToken) {
+      tx.textContent = '아직 연결하지 않았어요';
+    } else if (ghSyncing || ghState === 'syncing') {
+      st.classList.add('busy');
+      tx.textContent = '동기화하는 중… ' + ghRepo;
+    } else if (ghState === 'error') {
+      st.classList.add('err');
+      tx.textContent = ghError || '동기화하지 못했어요';
+    } else {
+      st.classList.add('on');
+      var when = ghLastSync ? '마지막 동기화 ' + fmtClock(ghLastSync) : '연결됨';
+      tx.textContent = when + ' · ' + items.length + '개 · ' + ghRepo;
+    }
+  }
+
+  function openSyncSheet() {
+    closeMenu();
+    $('ghToken').value = '';
+    $('ghRepo').value = ghRepo;
+    $('ghToken').placeholder = ghToken ? '저장된 토큰 사용 중 · 바꾸려면 새로 입력' : 'ghp_… 또는 github_pat_…';
+    setGhMsg('');
+    refreshSyncSheet();
+    openSheet('syncSheet');
+  }
+
+  function readTokenField() {
+    return String($('ghToken').value || '').replace(/\s+/g, '');
+  }
+
+  function readRepoField() {
+    var v = String($('ghRepo').value || '').trim()
+      .replace(/^https?:\/\/github\.com\//i, '')
+      .replace(/\.git$/i, '')
+      .replace(/\/+$/, '');
+    return v || ghRepo;
+  }
+
+  function ghConnect(btn) {
+    var token = readTokenField() || ghToken;
+    var repo = readRepoField();
+    if (!token) {
+      setGhMsg('토큰을 먼저 붙여넣어 주세요.');
+      $('ghToken').focus();
+      return;
+    }
+    if (!/^[A-Za-z0-9._-]+\/[A-Za-z0-9._-]+$/.test(repo)) {
+      setGhMsg('저장소는 owner/repo 형식으로 적어 주세요.');
+      return;
+    }
+    var label = btn ? btn.textContent : '';
+    if (btn) { btn.disabled = true; btn.textContent = '확인 중…'; }
+    setGhMsg('');
+
+    fetch(GH_API + '/repos/' + repo, { headers: ghHeaders(token), cache: 'no-store' })
+      .then(function (res) {
+        if (res.status === 401) throw mkErr('토큰이 올바르지 않아요 (401)', 401);
+        if (res.status === 404) throw mkErr('저장소를 찾을 수 없어요. 이름과 토큰 권한을 확인해 주세요 (404)', 404);
+        if (!res.ok) return res.text().then(function (t) { throw apiErr(res.status, t); });
+        return res.json();
+      })
+      .then(function (info) {
+        if (info.permissions && info.permissions.push === false) {
+          throw mkErr('이 토큰에는 쓰기 권한이 없어요. Contents: Read and write가 필요해요.', 403);
+        }
+        ghToken = token;
+        ghRepo = info.full_name || repo;
+        ghSha = null;
+        ghAuthFail = false;
+        ghState = 'ok';
+        saveSyncSettings();
+        $('ghToken').value = '';
+        $('ghRepo').value = ghRepo;
+        $('ghToken').placeholder = '저장된 토큰 사용 중 · 바꾸려면 새로 입력';
+        setGhMsg('연결됐어요 · ' + ghRepo + (info.private ? ' (비공개)' : ''), 'ok');
+        flushSyncUI();
+        return ghSync();
+      })
+      .then(function () {
+        if (!ghToken) return;
+        if (ghState === 'error') setGhMsg(ghError);
+        else setGhMsg('동기화됐어요 · ' + items.length + '개 항목', 'ok');
+      })
+      .catch(function (err) {
+        setGhMsg((err && err.message) ? err.message : '연결하지 못했어요');
+        flushSyncUI();
+      })
+      .then(function () {
+        if (btn) { btn.disabled = false; btn.textContent = label; }
+      });
+  }
+
+  function ghSyncNow(btn) {
+    var typed = readTokenField();
+    var repo = readRepoField();
+    if (typed || !ghToken || repo !== ghRepo) { ghConnect(btn); return; }
+
+    var label = btn ? btn.textContent : '';
+    if (btn) { btn.disabled = true; btn.textContent = '동기화 중…'; }
+    setGhMsg('');
+    ghAuthFail = false;
+    ghSync().then(function () {
+      if (ghState === 'error') setGhMsg(ghError);
+      else setGhMsg('동기화됐어요 · ' + items.length + '개 항목', 'ok');
+      if (btn) { btn.disabled = false; btn.textContent = label; }
+    });
+  }
+
+  function ghDisconnect() {
+    confirmSheet('GitHub 동기화를 끊을까요?', '이 브라우저에 저장된 토큰을 지웁니다. 기기의 기록과 저장소의 기록은 그대로 남아요.', '해제', function () {
+      ghToken = '';
+      ghSha = null;
+      ghAuthFail = false;
+      ghLastSync = null;
+      ghState = 'off';
+      ghError = '';
+      try { localStorage.removeItem(GH_LS_TOKEN); } catch (e) {}
+      $('ghToken').value = '';
+      $('ghToken').placeholder = 'ghp_… 또는 github_pat_…';
+      setGhMsg('동기화를 껐어요. 이 기기 기록은 그대로예요.', 'ok');
+      flushSyncUI();
+      toast('동기화를 껐어요');
+    });
   }
 
   /* ------------------------------------------------------------------ *
@@ -813,6 +1388,7 @@
     }
     if (!url && !title && rawAdd) title = rawAdd.trim();
 
+    shareFlow = true;
     openForm(null, { url: url, title: title, note: note });
 
     try { history.replaceState(null, '', location.pathname + location.hash); } catch (e) {}
@@ -848,6 +1424,7 @@
       if (act === 'import') $('importFile').click();
       if (act === 'install') doInstall();
       if (act === 'about') openSheet('infoSheet');
+      if (act === 'sync') openSyncSheet();
       if (act === 'clearDone') {
         var n = counts().done;
         if (!n) { toast('완료 폴더가 비어 있어요'); return; }
@@ -855,9 +1432,12 @@
           var kept = items.filter(function (it) { return it.status !== 'done'; });
           var gone = items.filter(function (it) { return it.status === 'done'; });
           items = kept;
+          var now = new Date().toISOString();
+          gone.forEach(function (it) { markDeleted(it.id, now); });
           if (idbOk) gone.forEach(function (it) { idbDel(it.id); }); else lsSet(items);
           render();
           toast(gone.length + '개를 비웠어요');
+          ghTouch();
         });
       }
     });
@@ -926,6 +1506,7 @@
         pendingPhoto = data;
         photoTouched = true;
         showPhoto();
+        if (data.length > 1024 * 1024) toast('사진이 커서 동기화가 느릴 수 있어요 (약 ' + mb(Math.round(data.length * 0.75)) + ')');
       }).catch(function () { toast('사진을 불러오지 못했어요'); });
       e.target.value = '';
     });
@@ -977,6 +1558,21 @@
       e.preventDefault();
       installEvent = e;
     });
+
+    // github sync
+    $('syncPill').addEventListener('click', openSyncSheet);
+    $('ghTest').addEventListener('click', function () { ghConnect(this); });
+    $('ghNow').addEventListener('click', function () { ghSyncNow(this); });
+    $('ghOff').addEventListener('click', ghDisconnect);
+    $('ghToken').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') { e.preventDefault(); ghConnect($('ghTest')); }
+    });
+    document.addEventListener('visibilitychange', function () {
+      if (!document.hidden) ghResume();
+    });
+    window.addEventListener('focus', ghResume);
+    window.addEventListener('online', ghResume);
+    setInterval(ghResume, 60000);
   }
 
   function pasteFromClipboard() {
@@ -1035,6 +1631,7 @@
    * ------------------------------------------------------------------ */
 
   function boot() {
+    loadSyncSettings();
     bind();
     openDB().then(function (handle) {
       db = handle;
@@ -1048,13 +1645,17 @@
         items = lsAll().map(normalizeItem).filter(Boolean);
       }
       render();
+      flushSyncUI();
       handleShare();
       registerSW();
+      if (ghToken) ghSync();
     }).catch(function () {
       items = lsAll().map(normalizeItem).filter(Boolean);
       render();
+      flushSyncUI();
       handleShare();
       registerSW();
+      if (ghToken) ghSync();
     });
   }
 
@@ -1063,4 +1664,24 @@
   } else {
     boot();
   }
+
+  /* small debug hook used by the release checks (merge rules, sync state) */
+  window.ArchiveSync = {
+    merge: mergeState,
+    sig: stateSig,
+    sync: ghSync,
+    parse: parseRemote,
+    state: function () {
+      return {
+        token: !!ghToken, repo: ghRepo, sha: ghSha, status: ghState, error: ghError,
+        last: ghLastSync, items: items, deleted: deleted
+      };
+    },
+    setToken: function (token, repo) {
+      ghToken = token || '';
+      if (repo) ghRepo = repo;
+      ghAuthFail = false;
+      return saveSyncSettings();
+    }
+  };
 })();

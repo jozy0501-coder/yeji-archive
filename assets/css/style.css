@@ -547,6 +547,75 @@ textarea.area { resize: none; min-height: 78px; line-height: 1.55; }
   white-space: nowrap;
 }
 
+/* ---------- sync ---------- */
+
+.brand-wrap { display: flex; align-items: baseline; gap: 8px; min-width: 0; }
+.sync-pill {
+  appearance: none;
+  border: 0;
+  background: none;
+  padding: 4px 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font: inherit;
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1;
+  color: var(--faint);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.sync-pill:active { opacity: 0.55; }
+.sync-pill .dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #C7C7CC;
+  transition: background 0.2s ease;
+}
+.sync-pill.on { color: var(--muted); }
+.sync-pill.on .dot { background: var(--ink); }
+.sync-pill.busy .dot { background: var(--ink); animation: sync-pulse 1.1s ease-in-out infinite; }
+.sync-pill.err { color: #B3261E; }
+.sync-pill.err .dot { background: #B3261E; }
+
+@keyframes sync-pulse {
+  0%, 100% { opacity: 0.22; }
+  50% { opacity: 1; }
+}
+
+.sync-body { padding: 2px 0 4px; }
+.sync-lede { margin: 4px 0 0; font-size: 12.5px; color: var(--muted); line-height: 1.6; }
+.sync-body .field:first-of-type { margin-top: 18px; }
+.sync-body .hint { flex-wrap: wrap; gap: 4px 6px; }
+.sync-body .hint a { color: var(--ink); text-underline-offset: 2px; }
+.err.ok { color: var(--muted); }
+
+.sync-state {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 16px;
+  padding: 10px 12px;
+  background: var(--panel);
+  border-radius: 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.sync-state .dot { flex: 0 0 auto; width: 5px; height: 5px; border-radius: 50%; background: #C7C7CC; }
+.sync-state.on .dot { background: var(--ink); }
+.sync-state.busy .dot { background: var(--ink); animation: sync-pulse 1.1s ease-in-out infinite; }
+.sync-state.err { color: #B3261E; }
+.sync-state.err .dot { background: #B3261E; }
+
+.sync-btns { display: flex; gap: 8px; margin-top: 12px; }
+.sync-btns .btn { flex: 1; padding: 13px 14px; font-size: 14px; border-radius: 11px; }
+.sync-off { margin-top: 6px; font-size: 12px; }
+.sync-note { margin: 14px 0 0; font-size: 11px; color: var(--faint); line-height: 1.6; }
+
 /* ---------- wide screens ---------- */
 
 @media (min-width: 700px) {
@@ -567,4 +636,5 @@ textarea.area { resize: none; min-height: 78px; line-height: 1.55; }
 
 @media (prefers-reduced-motion: reduce) {
   .sheet, .scrim, .toast, .fab, .tab { transition: none; }
+  .sync-pill .dot, .sync-state .dot { animation: none !important; }
 }

@@ -7,7 +7,8 @@ A quiet, monochrome inbox for links. Save something now, mark where you actually
 - **Share links** — opening `?add=<text or URL>` or `?url=…&title=…&text=…` opens the add sheet with the link pulled out of the share text (a link buried in an Instagram or YouTube share blurb is found too). `?v=`/`?add=` parameters are cleared from the address bar after use.
 - **One-tap paste** — **링크 붙여넣기** reads the clipboard; pasting anywhere while the sheet is open fills the URL field.
 - **Backup** — `···` → JSON 백업 / 백업 가져오기, plus 완료 폴더 비우기.
-- **PWA** — installable, offline shell, all data in IndexedDB on the device (nothing is uploaded).
+- **GitHub sync** — `···` → **GitHub 동기화** takes a fine-grained or classic token (repo `Contents: Read and write` on the private repo `jozy0501-coder/Test-`) and keeps `archive-data.json` on its `main` branch in step with the device. The token stays in this browser's localStorage, never in the URL. Items merge by id on `updatedAt` (newest wins) and removals travel as tombstones, so an item deleted on one device does not come back from the other. Sync runs on load, on returning to the app, and right after every add / edit / 저장 완료 / delete / 완료 폴더 비우기. The header pill shows `동기화됨` or `로컬 전용`; tap it to open the settings sheet.
+- **PWA** — installable, offline shell, data in IndexedDB on the device, plus the private repo when sync is on.
 
 ## Files
 
@@ -16,7 +17,7 @@ index.html            app shell
 assets/css/style.css  monochrome styles
 assets/js/app.js      all app logic (no dependencies)
 manifest.json         PWA manifest
-sw.js                 service worker (cache: my-archive-v2-1)
+sw.js                 service worker (cache: my-archive-v2-2)
 preview.html          phone-frame preview of the app
 data/items.json       empty; the app no longer seeds data from it
 ```

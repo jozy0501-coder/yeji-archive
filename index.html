@@ -14,7 +14,7 @@
 <link rel="manifest" href="./manifest.json">
 <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
 <link rel="icon" type="image/png" href="./assets/favicon.png">
-<link rel="stylesheet" href="./assets/css/style.css?v=4">
+<link rel="stylesheet" href="./assets/css/style.css?v=5">
 <script>
   window.__errs = [];
   addEventListener('error', function (e) { window.__errs.push(String((e && e.message) || e)); });
@@ -25,7 +25,12 @@
 
 <header class="head">
   <div class="head-in head-row">
-    <h1 class="brand">Archive</h1>
+    <div class="brand-wrap">
+      <h1 class="brand">Archive</h1>
+      <button class="sync-pill" id="syncPill" type="button" aria-label="GitHub 동기화 상태">
+        <span class="dot" aria-hidden="true"></span><span id="syncText">로컬 전용</span>
+      </button>
+    </div>
     <div class="head-actions">
       <button class="icon-btn" id="searchBtn" aria-label="검색" aria-pressed="false">
         <svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true"><circle cx="11" cy="11" r="6.4"/><path d="M16.2 16.2L20.5 20.5"/></svg>
@@ -169,7 +174,7 @@
         <dt>공유 링크</dt>
         <dd><code>?add=주소</code> 또는 <code>?url=주소&amp;title=제목</code>으로 열면 추가 화면이 바로 열립니다. 공유 텍스트에 섞인 링크도 찾아냅니다.</dd>
         <dt>저장 위치</dt>
-        <dd>기록은 이 브라우저 안(IndexedDB)에만 저장되고 서버로 보내지 않습니다. <b>··· → JSON으로 백업</b>으로 파일로 남겨 두세요.</dd>
+        <dd>기록은 이 브라우저 안(IndexedDB)에 저장되고, <b>··· → GitHub 동기화</b>를 켜면 비공개 저장소에도 함께 보관되어 사파리와 홈 화면 앱이 같은 목록을 봅니다. <b>··· → JSON으로 백업</b>으로 파일로도 남겨 두세요.</dd>
         <dt>홈 화면</dt>
         <dd>아이폰 Safari에서 공유 → <b>홈 화면에 추가</b>를 누르면 앱처럼 열립니다.</dd>
       </dl>
@@ -177,9 +182,52 @@
   </div>
 </section>
 
+<!-- GitHub sync -->
+<section class="sheet" id="syncSheet" role="dialog" aria-modal="true" aria-labelledby="syncTitle" aria-hidden="true">
+  <div class="sheet-in">
+    <div class="grab"></div>
+    <div class="sheet-head">
+      <div class="head-text">
+        <h2 id="syncTitle">GitHub 동기화</h2>
+        <p class="sub">비공개 저장소에 함께 보관</p>
+      </div>
+      <button class="icon-btn" data-close aria-label="닫기">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="sync-body">
+      <p class="sync-lede">사파리 공유로 담은 링크와 홈 화면 앱이 같은 목록을 보도록, 비공개 저장소 한 곳에 기록을 함께 둡니다.</p>
+      <div class="field">
+        <label class="lab" for="ghToken">GitHub 토큰</label>
+        <input class="inp" id="ghToken" type="password" placeholder="ghp_… 또는 github_pat_…" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+        <p class="hint">
+          <a href="https://github.com/settings/tokens/new?scopes=repo&amp;description=Archive" target="_blank" rel="noopener noreferrer">토큰 만들기</a>
+          <span>·</span><span>repo 권한이면 충분해요</span>
+        </p>
+      </div>
+      <div class="field">
+        <label class="lab" for="ghRepo">저장소</label>
+        <input class="inp" id="ghRepo" type="text" placeholder="jozy0501-coder/Test-" autocomplete="off" autocapitalize="off" spellcheck="false">
+        <p class="hint">archive-data.json · main</p>
+      </div>
+      <p class="err" id="ghMsg" hidden></p>
+      <div class="sync-state" id="ghStat">
+        <span class="dot" aria-hidden="true"></span><span id="ghStatText">아직 연결하지 않았어요</span>
+      </div>
+      <div class="sync-btns">
+        <button type="button" class="btn btn-line" id="ghTest">연결 테스트</button>
+        <button type="button" class="btn btn-primary" id="ghNow">지금 동기화</button>
+      </div>
+      <button type="button" class="btn btn-plain warn sync-off" id="ghOff" hidden>연결 해제</button>
+      <p class="sync-note">토큰은 이 브라우저에만 저장되고 주소창·방문 기록에는 남지 않아요. 사진은 1000px JPEG로 줄여 함께 저장되고, 전체가 8MB를 넘으면 동기화하지 않습니다.</p>
+    </div>
+  </div>
+</section>
+
 <div class="menu" id="menu" role="menu" hidden>
   <button data-act="export" role="menuitem">JSON으로 백업</button>
   <button data-act="import" role="menuitem">백업 가져오기</button>
+  <button data-act="sync" role="menuitem" id="menuSync">GitHub 동기화</button>
   <div class="sep"></div>
   <button data-act="install" role="menuitem">홈 화면에 추가</button>
   <button data-act="about" role="menuitem">앱 정보</button>
@@ -193,6 +241,6 @@
   <button id="toastAct" hidden></button>
 </div>
 
-<script src="./assets/js/app.js?v=4"></script>
+<script src="./assets/js/app.js?v=5"></script>
 </body>
 </html>
