@@ -17,7 +17,7 @@ index.html            app shell
 assets/css/style.css  monochrome styles
 assets/js/app.js      all app logic (no dependencies)
 manifest.json         PWA manifest
-sw.js                 service worker (cache: my-archive-v2-2)
+sw.js                 service worker (cache: my-archive-v2-3)
 preview.html          phone-frame preview of the app
 data/items.json       empty; the app no longer seeds data from it
 ```
