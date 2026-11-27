@@ -1,33 +1,31 @@
-# My Archive
+# Archive
 
-A small, offline-first scrapbook of places, things and links — built as a mobile-first web app for iPhone Safari (add to Home Screen).
+A quiet, monochrome inbox for links. Save something now, mark where you actually put it later.
 
-- **Search** across titles, notes, tags and your own memos
-- **Filters** by category (카페 · 맛집 · 아이템 · 링크·계정 · 여행·숙소 · 볼거리) and by where a record came from (favorites, shared, found together, added by me)
-- **Detail sheet** with the full note, tags, a link out to the map or shop, a favorite toggle and a private memo
-- **Add your own** records with a photo (resized in the browser) — stored on the device in IndexedDB
-- **JSON backup** export / import so a phone change doesn't lose anything
-- **PWA**: installable, offline shell, app icon and manifest
+- **대기 중 / 완료 folders** — an item waits in the inbox until you press **저장 완료** and choose where you saved it (네이버 지도, 유튜브, 인스타그램, 구매/장바구니, 메모/노션, or 직접 입력). The card then shows `✓ 네이버 지도 저장됨` with the time and moves to 완료, where it can be returned to the inbox or deleted.
+- **Cards** carry the site badge (YouTube, Instagram, Threads, Naver …), title, domain, note, tags and an optional photo, with 열기 / 삭제 actions.
+- **Share links** — opening `?add=<text or URL>` or `?url=…&title=…&text=…` opens the add sheet with the link pulled out of the share text (a link buried in an Instagram or YouTube share blurb is found too). `?v=`/`?add=` parameters are cleared from the address bar after use.
+- **One-tap paste** — **링크 붙여넣기** reads the clipboard; pasting anywhere while the sheet is open fills the URL field.
+- **Backup** — `···` → JSON 백업 / 백업 가져오기, plus 완료 폴더 비우기.
+- **PWA** — installable, offline shell, all data in IndexedDB on the device (nothing is uploaded).
 
-## How it works
-
-`data/items.json` holds the seed collection. Favorites, memos and records you add live only in your browser (IndexedDB + localStorage) — nothing is sent anywhere.
+## Files
 
 ```
-index.html          app shell
-assets/css/style.css
-assets/js/app.js    all app logic (no dependencies)
-assets/images/      58 photos, resized to max 1000px wide
-data/items.json     seed records
-manifest.json       PWA manifest
-sw.js               service worker (offline shell)
+index.html            app shell
+assets/css/style.css  monochrome styles
+assets/js/app.js      all app logic (no dependencies)
+manifest.json         PWA manifest
+sw.js                 service worker (cache: my-archive-v2-1)
+preview.html          phone-frame preview of the app
+data/items.json       empty; the app no longer seeds data from it
 ```
 
 ## Run locally
 
 ```bash
 python3 -m http.server 8000
-# then open http://localhost:8000
+# http://localhost:8000
 ```
 
 Served by GitHub Pages at <https://jozy0501-coder.github.io/yeji-archive/>.
@@ -35,5 +33,4 @@ Served by GitHub Pages at <https://jozy0501-coder.github.io/yeji-archive/>.
 ## Add to Home Screen (iPhone)
 
 1. Open the site in Safari.
-2. Tap the Share button.
-3. Choose **홈 화면에 추가**.
+2. Tap Share → **홈 화면에 추가**.

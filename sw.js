@@ -1,20 +1,23 @@
-/* My Archive service worker — offline shell with network-first pages. */
-const CACHE = 'my-archive-v3';
+/* Archive — offline shell. Pages come from the network first, assets from cache. */
+const CACHE = 'my-archive-v2-1';
 const SHELL = [
   './',
   './index.html',
-  './assets/css/style.css',
-  './assets/js/app.js',
+  './assets/css/style.css?v=4',
+  './assets/js/app.js?v=4',
   './manifest.json',
-  './data/items.json',
   './assets/icon-192.png',
   './assets/icon-512.png',
-  './assets/apple-touch-icon.png'
+  './assets/apple-touch-icon.png',
+  './assets/favicon.png'
 ];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(
-    caches.open(CACHE).then((c) => c.addAll(SHELL)).then(() => self.skipWaiting())
+    caches.open(CACHE)
+      .then((c) => c.addAll(SHELL))
+      .catch(() => {})
+      .then(() => self.skipWaiting())
   );
 });
 
@@ -29,17 +32,18 @@ self.addEventListener('activate', (e) => {
 self.addEventListener('fetch', (e) => {
   const req = e.request;
   if (req.method !== 'GET') return;
+
   let url;
   try { url = new URL(req.url); } catch (err) { return; }
   if (url.origin !== location.origin) return;
 
-  // Pages: try the network first so updates show up, fall back to cache offline.
+  // Pages: network first so updates land, cache as the offline fallback.
   if (req.mode === 'navigate' || url.pathname.endsWith('/') || url.pathname.endsWith('index.html')) {
     e.respondWith(
       fetch(req)
         .then((res) => {
           const copy = res.clone();
-          caches.open(CACHE).then((c) => c.put(req, copy));
+          caches.open(CACHE).then((c) => c.put(req, copy)).catch(() => {});
           return res;
         })
         .catch(() => caches.match(req).then((hit) => hit || caches.match('./index.html')))
@@ -47,14 +51,14 @@ self.addEventListener('fetch', (e) => {
     return;
   }
 
-  // Everything else: serve from cache, refresh in the background.
+  // Assets: cache first, refreshed in the background.
   e.respondWith(
     caches.match(req).then((hit) => {
       const network = fetch(req)
         .then((res) => {
           if (res && res.ok) {
             const copy = res.clone();
-            caches.open(CACHE).then((c) => c.put(req, copy));
+            caches.open(CACHE).then((c) => c.put(req, copy)).catch(() => {});
           }
           return res;
         })
