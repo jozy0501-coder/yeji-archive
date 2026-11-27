@@ -1,0 +1,979 @@
+{
+ "app": "my-archive",
+ "version": 1,
+ "generated_at": "2026-11-27",
+ "count": 60,
+ "items": [
+  {
+   "id": "20261127-cafe-dahlia",
+   "title": "찻집 달리아",
+   "category": "카페",
+   "date": "2026-11-27",
+   "note": "압구정역 4번 출구 302m. 산지별 잎차를 6,000원 균일가로 내는 조용한 찻집. 월요일 11:00~23:00(라스트오더 22:30) 영업 확인.",
+   "url": "https://map.naver.com/p/entry/place/1761585898",
+   "source": "found_with_pickle",
+   "tags": [
+    "차전문",
+    "압구정",
+    "11월 약속",
+    "네이버지도"
+   ],
+   "image": "./assets/images/20261127-cafe-dahlia.jpg"
+  },
+  {
+   "id": "20261127-cafe-twg",
+   "title": "TWG Tea 안다즈점",
+   "category": "카페",
+   "date": "2026-11-27",
+   "note": "압구정역 3번 출구 42m, 안다즈 서울 1층. 50여 종 티와 디저트 세트. 매일 10:00~21:30(라스트오더 20:30).",
+   "url": "https://map.naver.com/p/entry/place/1347429754",
+   "source": "found_with_pickle",
+   "tags": [
+    "차전문",
+    "티하우스",
+    "압구정",
+    "호텔"
+   ],
+   "image": "./assets/images/20261127-cafe-twg.jpg"
+  },
+  {
+   "id": "20261127-cafe-sorochasil",
+   "title": "소로차실 (공부차 티하우스)",
+   "category": "카페",
+   "date": "2026-11-27",
+   "note": "압구정로데오역 2번 출구 684m. 일요일만 쉬고 월요일 11:00~20:00. 프라이빗 차실과 티 코스(1인 6만 원).",
+   "url": "https://map.naver.com/p/entry/place/1651587496",
+   "source": "found_with_pickle",
+   "tags": [
+    "차전문",
+    "티코스",
+    "프라이빗",
+    "압구정"
+   ],
+   "image": "./assets/images/20261127-cafe-sorochasil.jpg"
+  },
+  {
+   "id": "20261127-cafe-chasunchaek",
+   "title": "차선책 압구정점",
+   "category": "카페",
+   "date": "2026-11-27",
+   "note": "압구정로데오역 5번 출구 271m. 대나무·한옥 감성 공간에서 차와 노슈가 갸또 디저트. 매일 11:00~22:00(구글 지도·최근 후기 기준).",
+   "url": "https://map.naver.com/p/entry/place/1675613403",
+   "source": "found_with_pickle",
+   "tags": [
+    "차전문",
+    "디저트",
+    "압구정",
+    "한옥"
+   ],
+   "image": "./assets/images/20261127-cafe-chasunchaek.jpg"
+  },
+  {
+   "id": "20261127-cafe-pasado",
+   "title": "파사도 망원",
+   "category": "카페",
+   "date": "2026-11-27",
+   "note": "서울 마포구 포은로6길 9(망원동). ★4.85·리뷰 2,743. '달콤한 무화과 라떼'로 소개된 카페·디저트집. 네이버 지도 '망원' 리스트에 저장 완료.",
+   "url": "https://map.naver.com/p/entry/place/1367658278",
+   "source": "shared_by_user",
+   "tags": [
+    "스레드",
+    "coffeelog_korea",
+    "망원",
+    "무화과라떼",
+    "네이버지도저장"
+   ],
+   "image": "./assets/images/20261127-cafe-pasado.jpg"
+  },
+  {
+   "id": "20261127-cafe-eround",
+   "title": "에이라운드",
+   "category": "카페",
+   "date": "2026-11-27",
+   "note": "서울 종로구 창경궁로 263 1·2층(명륜2가, 혜화역 4번 출구 271m). ★4.92·리뷰 2,157. '세련된 공간 속 달콤한 휴식'. 네이버 지도 '혜화' 리스트에 저장.",
+   "url": "https://map.naver.com/p/entry/place/1202431112",
+   "source": "shared_by_user",
+   "tags": [
+    "스레드",
+    "coffeelog_korea",
+    "혜화",
+    "네이버지도저장"
+   ],
+   "image": "./assets/images/20261127-cafe-eround.jpg"
+  },
+  {
+   "id": "20261127-cafe-mik",
+   "title": "미크",
+   "category": "카페",
+   "date": "2026-11-27",
+   "note": "서울 송파구 송파대로 458 1층 104호(석촌역 1번 출구 231m). 리뷰 1,263. '달콤함이 살아있는 인생 바나나푸딩'. 네이버 지도 '송파' 리스트에 저장.",
+   "url": "https://map.naver.com/p/entry/place/1502374620",
+   "source": "shared_by_user",
+   "tags": [
+    "스레드",
+    "coffeelog_korea",
+    "송파",
+    "바나나푸딩",
+    "네이버지도저장"
+   ],
+   "image": "./assets/images/20261127-cafe-mik.jpg"
+  },
+  {
+   "id": "20261127-cafe-dattcoffee",
+   "title": "댓커피",
+   "category": "카페",
+   "date": "2026-11-27",
+   "note": "서울 마포구 백범로1길 60(노고산동, 신촌역 5번 출구 242m). ★4.82·리뷰 1,105. '따뜻한 감성으로 채워지는 소중한 순간'. 네이버 지도 '신촌' 리스트에 저장.",
+   "url": "https://map.naver.com/p/entry/place/1116487772",
+   "source": "shared_by_user",
+   "tags": [
+    "스레드",
+    "coffeelog_korea",
+    "신촌",
+    "네이버지도저장"
+   ],
+   "image": "./assets/images/20261127-cafe-dattcoffee.jpg"
+  },
+  {
+   "id": "20261127-cafe-chatswood",
+   "title": "채스우드커피",
+   "category": "카페",
+   "date": "2026-11-27",
+   "note": "서울 강동구 성안로 42 1층(성내동). 리뷰 1,457. '바리스타 챔피언의 필터커피'로 소개. 네이버 지도 '강동' 리스트에 저장.",
+   "url": "https://map.naver.com/p/entry/place/1066326254",
+   "source": "shared_by_user",
+   "tags": [
+    "스레드",
+    "coffeelog_korea",
+    "강동",
+    "필터커피",
+    "네이버지도저장"
+   ],
+   "image": "./assets/images/20261127-cafe-chatswood.jpg"
+  },
+  {
+   "id": "20261127-cafe-ppanide",
+   "title": "빠니드 엠 무니",
+   "category": "카페",
+   "date": "2026-11-27",
+   "note": "서울 강남구 압구정로56길 16(신사동, 압구정로데오역 5번 출구 94m). 리뷰 6,794. TV '전지적 참견 시점'에 나온 디저트 카페(망고빙수). 네이버 지도 '압구정' 리스트에 저장.",
+   "url": "https://map.naver.com/p/entry/place/1614953667",
+   "source": "shared_by_user",
+   "tags": [
+    "스레드",
+    "coffeelog_korea",
+    "압구정",
+    "망고빙수",
+    "방송출연",
+    "네이버지도저장"
+   ],
+   "image": "./assets/images/20261127-cafe-ppanide.jpg"
+  },
+  {
+   "id": "20261127-item-avgvst",
+   "title": "Avgvst × Crosby Studios Paintbrush Trinket (귀걸이 참)",
+   "category": "아이템",
+   "date": "2026-11-27",
+   "note": "공유된 yarseoul.kr 착용사진 속 귀걸이의 원제품. 베를린 주얼리 브랜드 Avgvst와 Crosby Studios 협업, 925 실버/로듐 도금. 45€(약 6~7만 원대), 전 세계 직배송. 페인트브러쉬 참(21×6mm) 단독 판매라 사진처럼 착용하려면 실버 후프 링 별도 필요. yarseoul.kr은 반지·목걸이·팔찌·키링만 취급해 귀걸이 미판매.",
+   "url": "https://avgvstjewelry.com/catalog/necklaces/avgvst-x-crosby-studios-paintbrush-trinket",
+   "source": "shared_by_user",
+   "tags": [
+    "주얼리",
+    "귀걸이",
+    "해외직구",
+    "이미지검색"
+   ],
+   "image": "./assets/images/20261127-item-avgvst.jpg"
+  },
+  {
+   "id": "20261127-account-oka",
+   "title": "스마트스토어 'oka house' 사장 스레드 @oka_jewelry",
+   "category": "링크·계정",
+   "date": "2026-11-27",
+   "note": "스마트스토어 oka house(오카, 대표 이상엽) 판매자의 새 스레드 계정. 기존 인스타·스레드 @oka__house가 삭제돼 2026-11-02 새로 개설. 프로필 링크가 smartstore.naver.com/okahouse로 연결되는 것까지 확인. 소개: '오사카, 후쿠오카 여행으로 시작된 주얼리 브랜드, 여자친구랑 동업 중인 남자 사장'.",
+   "url": "https://www.threads.com/@oka_jewelry",
+   "source": "shared_by_user",
+   "tags": [
+    "스레드",
+    "주얼리",
+    "스마트스토어",
+    "판매자"
+   ],
+   "image": "./assets/images/20261127-account-oka.jpg"
+  },
+  {
+   "id": "20261126-item-bracelet",
+   "title": "인스타 릴스 속 남자 팔찌 (제품 미확정)",
+   "category": "링크·계정",
+   "date": "2026-11-26",
+   "note": "릴스 원문과 댓글 17개에 브랜드·판매처 언급 없음. 화질상 단정 불가. 골드 체인에 블랙 하트 참과 십자가 모티브 구성 → 아미(Ami Paris) 골드 브래스 해머드 아미 드 꾀흐 브레이슬릿(골드/블랙)에 십자가 팔찌를 레이어드했거나 14K·써지컬 십자가+하트 참 체인 팔찌류로 추정. 확실히 하려면 릴스 댓글이나 @niko_seoul DM 문의.",
+   "url": "https://www.instagram.com/jy___153kg/reel/DgMxhliOe1i/",
+   "source": "shared_by_user",
+   "tags": [
+    "인스타",
+    "릴스",
+    "팔찌",
+    "미확정",
+    "아미드꾀흐"
+   ],
+   "image": "./assets/images/20261126-item-bracelet.jpg"
+  },
+  {
+   "id": "20261125-food-mibbedong",
+   "title": "미쁘동 연남본점",
+   "category": "맛집",
+   "date": "2026-11-25",
+   "note": "해산물 덮밥·우니 핫플. 매일 11:00~22:00(라스트오더 21:30), 브레이크 타임 없음. 캐치테이블·네이버 예약 지원.",
+   "url": "https://map.naver.com/p/search/%EB%AF%B8%EC%81%98%EB%8F%99%20%EC%97%B0%EB%82%A8%EB%B3%B8%EC%A0%90",
+   "source": "found_with_pickle",
+   "tags": [
+    "홍대",
+    "연남",
+    "해산물덮밥",
+    "브레이크타임없음"
+   ],
+   "image": "./assets/images/20261125-food-mibbedong.jpg"
+  },
+  {
+   "id": "20261125-food-langt",
+   "title": "랑트 연남",
+   "category": "맛집",
+   "date": "2026-11-25",
+   "note": "퓨전 파스타·뇨끼·화덕피자 다이닝. 매일 11:30~21:30(라스트오더 20:30), 브레이크 타임 없음. 캐치테이블 예약 지원.",
+   "url": "https://map.naver.com/p/search/%EB%9E%91%ED%8A%B8%20%EC%97%B0%EB%82%A8",
+   "source": "found_with_pickle",
+   "tags": [
+    "홍대",
+    "연남",
+    "파스타",
+    "브레이크타임없음"
+   ],
+   "image": "./assets/images/20261125-food-langt.jpg"
+  },
+  {
+   "id": "20261125-food-kimchunbae",
+   "title": "고기꾼김춘배 홍대숲길점",
+   "category": "맛집",
+   "date": "2026-11-25",
+   "note": "경의선 숲길 옆 한옥 느낌 외관. 직원이 직접 고기를 구워주고, 매일 12:00~23:00. 네이버 예약 가능, 주류 외 콜키지 가능.",
+   "url": "https://map.naver.com/p/entry/place/1547261740",
+   "source": "found_with_pickle",
+   "tags": [
+    "홍대",
+    "고기",
+    "한옥",
+    "브레이크타임없음"
+   ],
+   "image": "./assets/images/20261125-food-kimchunbae.jpg"
+  },
+  {
+   "id": "20261125-food-sangsanglao",
+   "title": "상상라오 회전훠궈구이 홍대점",
+   "category": "맛집",
+   "date": "2026-11-25",
+   "note": "홍대입구 9번 출구 도보 1분. 1인 회전 훠궈+구이 무한리필, 평일 런치 18,900원·디너/주말 22,900원. 매일 11:00~24:00. 캐치테이블 대기 확인 가능.",
+   "url": "https://map.naver.com/p/search/%EC%83%81%EC%83%81%EB%9D%BC%EC%98%A4%20%ED%9A%8C%EC%A0%84%ED%9B%A0%EA%B6%88%EA%B5%AC%EC%9D%B4%20%ED%99%8D%EB%8C%80%EC%A0%90",
+   "source": "found_with_pickle",
+   "tags": [
+    "홍대",
+    "훠궈",
+    "무한리필",
+    "브레이크타임없음"
+   ],
+   "image": "./assets/images/20261125-food-sangsanglao.jpg"
+  },
+  {
+   "id": "20261125-food-kamiya",
+   "title": "카미야 (홍대)",
+   "category": "맛집",
+   "date": "2026-11-25",
+   "note": "와우산로21길 28-6. '또간집' 홍대 편에 나온 제주 흑돼지 돈가스·덮밥 맛집. 매일 11:00~21:30(라스트오더 21:00). 오꼬노미소스동 9,500원·믹스가츠 11,000원.",
+   "url": "https://map.naver.com/p/search/%EC%B9%B4%EB%AF%B8%EC%95%BC%20%ED%99%8D%EB%8C%80",
+   "source": "found_with_pickle",
+   "tags": [
+    "홍대",
+    "돈가스",
+    "방송출연",
+    "브레이크타임없음"
+   ],
+   "image": "./assets/images/20261125-food-kamiya.jpg"
+  },
+  {
+   "id": "20261125-food-khans",
+   "title": "칸스 다이닝 연남본점",
+   "category": "맛집",
+   "date": "2026-11-25",
+   "note": "동교로 265 2층. 어두운 톤 무드 공간에서 브런치·파스타·스테이크. 화~일 11:30~22:30, 네이버 예약 가능.",
+   "url": "https://map.naver.com/p/entry/place/1245083675",
+   "source": "found_with_pickle",
+   "tags": [
+    "연남",
+    "브런치",
+    "파스타",
+    "데이트"
+   ],
+   "image": "./assets/images/20261125-food-khans.jpg"
+  },
+  {
+   "id": "20261125-food-haidilao",
+   "title": "하이디라오 홍대점",
+   "category": "맛집",
+   "date": "2026-11-25",
+   "note": "와이즈파크 5층. 매일 10:00~다음 날 05:00(라스트오더 03:00). 식사 시 3시간 무료주차, 캐치테이블 대기·예약 지원. 브레이크 타임 없음.",
+   "url": "https://map.naver.com/p/search/%ED%95%98%EC%9D%B4%EB%94%94%EB%9D%BC%EC%98%A4%20%ED%99%8D%EB%8C%80%EC%A0%90",
+   "source": "found_with_pickle",
+   "tags": [
+    "홍대",
+    "훠궈",
+    "심야",
+    "주차"
+   ],
+   "image": "./assets/images/20261125-food-haidilao.jpg"
+  },
+  {
+   "id": "20261125-food-bulia",
+   "title": "불이아 홍대본점",
+   "category": "맛집",
+   "date": "2026-11-25",
+   "note": "홍대입구 1번 출구 도보 1~5분. 매일 11:00~23:00. 진한 토마토탕과 불이아 정식(1인 29,000원)으로 알려진 홍대 1세대 훠궈집. 네이버·캐치테이블 예약, 2시간 주차.",
+   "url": "https://map.naver.com/p/search/%EB%B6%88%EC%9D%B4%EC%95%84%20%ED%99%8D%EB%8C%80%EB%B3%B8%EC%A0%90",
+   "source": "found_with_pickle",
+   "tags": [
+    "홍대",
+    "훠궈",
+    "토마토탕",
+    "주차"
+   ],
+   "image": "./assets/images/20261125-food-bulia.jpg"
+  },
+  {
+   "id": "20261125-food-samgugjeong",
+   "title": "삼국정 연남본점",
+   "category": "맛집",
+   "date": "2026-11-25",
+   "note": "동교로 268 2층. 매일 11:00~23:00(라스트오더 22:00). 가성비 무한리필 훠궈 — 평일 런치 15시까지 19,800원·90분, 디너/주말 23,800원·120분, 수제 새우완자 8종 셀프바.",
+   "url": "https://map.naver.com/p/search/%EC%82%BC%EA%B5%AD%EC%A0%95%20%EC%97%B0%EB%82%A8%EB%B3%B8%EC%A0%90",
+   "source": "found_with_pickle",
+   "tags": [
+    "연남",
+    "훠궈",
+    "무한리필",
+    "가성비"
+   ],
+   "image": "./assets/images/20261125-food-samgugjeong.jpg"
+  },
+  {
+   "id": "20261124-cafe-goodweather",
+   "title": "카페굿웨더 서현본점",
+   "category": "카페",
+   "date": "2026-11-24",
+   "note": "서현역 5번 출구 도보 2~3분, 유성그린빌딩 2층. 매일 12:00~23:00(라스트오더 22:00). 직접 로스팅 카페라떼 5,500원·클라우드크림라떼 6,700원·딸기라떼 7,000원, 조각케이크 8,200~8,800원, 홀케이크 52,000원~(2~3일 전 예약). 8조각 골라 홀케이크처럼 포장 가능. 기계식 주차 1시간 30분(SUV 불가).",
+   "url": "https://map.naver.com/p/entry/place/1147029340",
+   "source": "found_with_pickle",
+   "tags": [
+    "서현",
+    "라떼",
+    "케이크",
+    "로스터리",
+    "주차"
+   ],
+   "image": "./assets/images/20261124-cafe-goodweather.jpg"
+  },
+  {
+   "id": "20261124-cafe-invisible",
+   "title": "인비저블커피 분당서현점",
+   "category": "카페",
+   "date": "2026-11-24",
+   "note": "차분한 분위기. 산미·고소·디카페인 3종 원두를 골라 라떼 5,500원·크림커피 6,000원. 매일 09:30~22:00, 건물 1시간 주차.",
+   "url": "https://map.naver.com/p/entry/place/1526582809",
+   "source": "found_with_pickle",
+   "tags": [
+    "서현",
+    "라떼",
+    "원두선택",
+    "조용"
+   ],
+   "image": "./assets/images/20261124-cafe-invisible.jpg"
+  },
+  {
+   "id": "20261124-cafe-alexander",
+   "title": "알렉산더 스페셜티커피&베이커리",
+   "category": "카페",
+   "date": "2026-11-24",
+   "note": "1층 매장. 스페셜티 원두(산미/고소 선택) 카페라떼 4,400원으로 가성비 좋고 베이커리·1시간 무료주차. 평일 07:00~21:00.",
+   "url": "https://map.naver.com/p/search/%EC%95%8C%EB%A0%89%EC%82%B0%EB%8D%94%20%EC%8A%A4%ED%8E%98%EC%85%9C%ED%8B%B0%EC%BB%A4%ED%94%BC%20%EB%B2%A0%EC%9D%B4%EC%BB%A4%EB%A6%AC%20%EB%B6%84%EB%8B%B9%EC%84%9C%ED%98%84",
+   "source": "found_with_pickle",
+   "tags": [
+    "서현",
+    "라떼",
+    "가성비",
+    "베이커리"
+   ],
+   "image": "./assets/images/20261124-cafe-alexander.jpg"
+  },
+  {
+   "id": "20261124-cafe-cakeisland",
+   "title": "케잌아일랜드",
+   "category": "카페",
+   "date": "2026-11-24",
+   "note": "효자촌 상가. 100% 동물성 생크림과 무첨가 수제 케이크로 알려진 곳. 월~토 10:00~21:00.",
+   "url": "https://map.naver.com/p/search/%EC%BC%80%EC%9E%8C%EC%95%84%EC%9D%BC%EB%9E%9C%EB%93%9C%20%EB%B6%84%EB%8B%B9%20%EC%84%9C%ED%98%84",
+   "source": "found_with_pickle",
+   "tags": [
+    "서현",
+    "케이크",
+    "수제케이크"
+   ],
+   "image": "./assets/images/20261124-cafe-cakeisland.jpg"
+  },
+  {
+   "id": "20261124-cafe-seohyeon170",
+   "title": "서현170",
+   "category": "카페",
+   "date": "2026-11-24",
+   "note": "건물 2시간 무료주차. 강아지·조각케이크와 베이커리를 갖춘 대형 카페. 매일 08:30~21:00.",
+   "url": "https://map.naver.com/p/entry/place/1805021832",
+   "source": "found_with_pickle",
+   "tags": [
+    "서현",
+    "케이크",
+    "대형카페",
+    "주차",
+    "반려견"
+   ],
+   "image": "./assets/images/20261124-cafe-seohyeon170.jpg"
+  },
+  {
+   "id": "20261124-cafe-alldaysweets",
+   "title": "올데이스위츠",
+   "category": "카페",
+   "date": "2026-11-24",
+   "note": "서현역 1번 출구 앞. 네이버 플레이스 정보와 달리 구글 지도상 화요일 휴무로 표시돼 추천에서 보류 — 방문 전 전화(0507-1314-4150)로 영업 확인 필요.",
+   "url": "https://map.naver.com/p/search/%EC%98%AC%EB%8D%B0%EC%9D%B4%EC%8A%A4%EC%9C%84%EC%B8%A0%20%EC%84%9C%ED%98%84",
+   "source": "found_with_pickle",
+   "tags": [
+    "서현",
+    "케이크",
+    "휴무주의",
+    "확인필요"
+   ],
+   "image": null
+  },
+  {
+   "id": "20261120-food-kobongmin",
+   "title": "고봉민김밥인 용인동천점",
+   "category": "맛집",
+   "date": "2026-11-20",
+   "note": "손곡로 100 훼미리프라자 114호, 동천타워에서 도보 3분(약 200m)으로 가장 가까움. 매일 08:00~20:30. 메뉴에 돌판비빔밥 있음.",
+   "url": "https://map.naver.com/p/entry/place/38226865",
+   "source": "found_with_pickle",
+   "tags": [
+    "수지",
+    "동천타워",
+    "돌판비빔밥",
+    "가까움"
+   ],
+   "image": "./assets/images/20261120-food-kobongmin.jpg"
+  },
+  {
+   "id": "20261120-food-guksisarangchae",
+   "title": "국시사랑채",
+   "category": "맛집",
+   "date": "2026-11-20",
+   "note": "문인로31번길 3-1, 동천타워에서 도보 15분(약 900m). 돌솥비빔밥 11,000원, 돌솥비빔밥 후기가 좋은 동네 맛집. 금요일 10:00~15:00 영업·주말 휴무.",
+   "url": "https://map.naver.com/p/entry/place/36965027",
+   "source": "found_with_pickle",
+   "tags": [
+    "수지",
+    "동천타워",
+    "돌솥비빔밥",
+    "주말휴무"
+   ],
+   "image": "./assets/images/20261120-food-guksisarangchae.jpg"
+  },
+  {
+   "id": "20261120-food-hwagyeong",
+   "title": "화경김밥 (동천역 유타워)",
+   "category": "맛집",
+   "date": "2026-11-20",
+   "note": "신수로 767 유타워 2층. 월~토 09:00~20:30(일요일 ~15:00). 돌솥비빔밥·오징어돌솥 10,000원.",
+   "url": "https://map.naver.com/p/entry/place/1252599242",
+   "source": "found_with_pickle",
+   "tags": [
+    "수지",
+    "동천역",
+    "돌솥비빔밥",
+    "김밥"
+   ],
+   "image": "./assets/images/20261120-food-hwagyeong.jpg"
+  },
+  {
+   "id": "20261120-food-buchusamgyeop",
+   "title": "부추삼겹살 동천역점",
+   "category": "맛집",
+   "date": "2026-11-20",
+   "note": "신수로 767 유타워 A동 136호, 11:00~23:00. 11:00~14:00 점심특선으로 전주·날치알 돌솥비빔밥 10,000원(반찬 4종).",
+   "url": "https://map.naver.com/p/entry/place/2003656869",
+   "source": "found_with_pickle",
+   "tags": [
+    "수지",
+    "동천역",
+    "돌솥비빔밥",
+    "점심특선"
+   ],
+   "image": null
+  },
+  {
+   "id": "20261117-cafe-primary",
+   "title": "프라이머리커피",
+   "category": "카페",
+   "date": "2026-11-17",
+   "note": "풍덕천로 115-3, 수지 엔토리에서 도보 6분(300m). 매일 밤 10시까지 열어 저녁 약속 전후로 들르기 좋음. 진한 커피와 아인슈패너 호평.",
+   "url": "https://map.naver.com/p/entry/place/1788142195",
+   "source": "found_with_pickle",
+   "tags": [
+    "수지",
+    "엔토리",
+    "커피맛집",
+    "늦게까지"
+   ],
+   "image": "./assets/images/20261117-cafe-primary.jpg"
+  },
+  {
+   "id": "20261117-cafe-stitch",
+   "title": "스티치커피플레이스",
+   "category": "카페",
+   "date": "2026-11-17",
+   "note": "풍덕천로140번길 21, 엔토리에서 도보 6분(400m). 크림라떼와 플랫화이트 평이 좋음.",
+   "url": "https://map.naver.com/p/entry/place/36874318",
+   "source": "found_with_pickle",
+   "tags": [
+    "수지",
+    "엔토리",
+    "크림라떼",
+    "플랫화이트"
+   ],
+   "image": "./assets/images/20261117-cafe-stitch.jpg"
+  },
+  {
+   "id": "20261117-cafe-nook",
+   "title": "눜커피",
+   "category": "카페",
+   "date": "2026-11-17",
+   "note": "문인로31번길 3-14, 엔토리에서 도보 24분(1.5km). 구글 평점 4.8의 호주식 스페셜티 로스터리. 시그니처 몽블랑·웰컴티, 19시 마감.",
+   "url": "https://map.naver.com/p/entry/place/1083760436",
+   "source": "found_with_pickle",
+   "tags": [
+    "수지",
+    "스페셜티",
+    "로스터리",
+    "디저트"
+   ],
+   "image": "./assets/images/20261117-cafe-nook.jpg"
+  },
+  {
+   "id": "20261112-food-sanjeongjib",
+   "title": "박순례 손말이고기 산정집 본점",
+   "category": "맛집",
+   "date": "2026-11-12",
+   "note": "원주 일산동, 흥업면(연세대 미래캠퍼스)에서 차로 21분·11.4km. 1967년부터 이어진 노포로 얇게 저민 한우 우둔살을 미나리·쪽파·깻잎에 말아 무쇠판에 들기름으로 구워 먹고, 판에 바로 된장찌개를 끓임. 점심 14:00까지라 13시 전후 방문 권장.",
+   "url": "https://map.naver.com/p/search/%EB%B0%95%EC%88%9C%EB%A1%80%20%EC%86%90%EB%A7%90%EB%A6%AC%EA%B3%A0%EA%B8%B0%20%EC%82%B0%EC%A0%95%EC%A7%91%20%EB%B3%B8%EC%A0%90%20%EC%9B%90%EC%A3%BC",
+   "source": "found_with_pickle",
+   "tags": [
+    "원주",
+    "한우",
+    "노포",
+    "점심"
+   ],
+   "image": "./assets/images/20261112-food-sanjeongjib.jpg"
+  },
+  {
+   "id": "20261112-food-kkachidungji",
+   "title": "까치둥지",
+   "category": "맛집",
+   "date": "2026-11-12",
+   "note": "원주 단구동, 흥업면에서 차로 19분·12.1km. 전국 1위 알탕 성지로 꼽히는 집 — 선홍빛 명란·곤이·해물이 냄비 가득. 점심 라스트오더 14:30.",
+   "url": "https://map.naver.com/p/search/%EA%B9%8C%EC%B9%98%EB%91%A5%EC%A7%80%20%EC%9B%90%EC%A3%BC",
+   "source": "found_with_pickle",
+   "tags": [
+    "원주",
+    "알탕",
+    "해물",
+    "점심"
+   ],
+   "image": "./assets/images/20261112-food-kkachidungji.jpg"
+  },
+  {
+   "id": "20261112-food-heungeopmuk",
+   "title": "흥업묵집",
+   "category": "맛집",
+   "date": "2026-11-12",
+   "note": "원주 흥업면, 이동 기점에서 차로 9분·3.9km. 60년 노포로 직접 쑨 메밀묵사발(냉/온)·메밀전병·메밀전. 바로 옆에 짬뽕·탕수육으로 유명한 3대 중식 노포 '금룡'이 있음.",
+   "url": "https://map.naver.com/p/search/%ED%9D%A5%EC%97%85%EB%AC%B5%EC%A7%91%20%EC%9B%90%EC%A3%BC",
+   "source": "found_with_pickle",
+   "tags": [
+    "원주",
+    "메밀묵",
+    "노포",
+    "가까움"
+   ],
+   "image": "./assets/images/20261112-food-heungeopmuk.jpg"
+  },
+  {
+   "id": "20261112-cafe-volta",
+   "title": "볼타커피 (The Volta Coffee)",
+   "category": "카페",
+   "date": "2026-11-12",
+   "note": "원주 단구동 앙월길 10-1, 흥업면에서 차로 15분·9.0km. 자체 하우스 블렌드 '이터널 선샤인'으로 내는 고소한 플랫화이트·바닐라라떼, 싱글오리진 브루잉. 전국 카페에 원두를 납품하는 로스터리.",
+   "url": "https://map.naver.com/p/search/%EB%B3%BC%ED%83%80%EC%BB%A4%ED%94%BC%20%EC%9B%90%EC%A3%BC",
+   "source": "found_with_pickle",
+   "tags": [
+    "원주",
+    "로스터리",
+    "플랫화이트",
+    "원두"
+   ],
+   "image": "./assets/images/20261112-cafe-volta.jpg"
+  },
+  {
+   "id": "20261112-cafe-coffeeradio",
+   "title": "커피라디오 관설점(본점)",
+   "category": "카페",
+   "date": "2026-11-12",
+   "note": "원주 반곡관설동, 차로 15분·9.4km. 2006년부터 자리한 원주 1세대 스페셜티, 블루리본 서베이 6년 연속 수록. SCA 공인 트레이너 대표가 독일 프로밧 로스터로 볶는 약배전 '블랙선'·강배전 '벨루치'.",
+   "url": "https://map.naver.com/p/search/%EC%BB%A4%ED%94%BC%EB%9D%BC%EB%94%94%EC%98%A4%20%EA%B4%80%EC%84%A4%EC%A0%90%20%EC%9B%90%EC%A3%BC",
+   "source": "found_with_pickle",
+   "tags": [
+    "원주",
+    "스페셜티",
+    "블루리본",
+    "핸드드립"
+   ],
+   "image": "./assets/images/20261112-cafe-coffeeradio.jpg"
+  },
+  {
+   "id": "20261112-cafe-paulsway",
+   "title": "폴스웨이커피",
+   "category": "카페",
+   "date": "2026-11-12",
+   "note": "원주 무실동 방향 길목, 차로 13분·7.5km. 바리스타 대회 수상 경력 대표가 운영하며 '인생 플랫화이트'로 불리는 진한 커피, 원두 선택권, 통창 2층 공간.",
+   "url": "https://map.naver.com/p/search/%ED%8F%B4%EC%8A%A4%EC%9B%A8%EC%9D%B4%EC%BB%A4%ED%94%BC%20%EC%9B%90%EC%A3%BC",
+   "source": "found_with_pickle",
+   "tags": [
+    "원주",
+    "플랫화이트",
+    "로스터리",
+    "통창"
+   ],
+   "image": "./assets/images/20261112-cafe-paulsway.jpg"
+  },
+  {
+   "id": "20261112-spot-suzip",
+   "title": "수집 (su.zip)",
+   "category": "아이템",
+   "date": "2026-11-12",
+   "note": "원주 단구동 나비허리길 70, 볼타커피에서 차로 3분·1.1km. 목요일 11:00~21:00. 토끼 인형·파우치·엽서·키링 같은 라이프스타일 소품 편집숍(소품샵).",
+   "url": "https://map.naver.com/p/search/%EC%88%98%EC%A7%91%20su.zip%20%EC%9B%90%EC%A3%BC%20%EB%8B%A8%EA%B5%AC%EB%8F%99",
+   "source": "found_with_pickle",
+   "tags": [
+    "원주",
+    "소품샵",
+    "편집숍",
+    "인테리어소품"
+   ],
+   "image": "./assets/images/20261112-spot-suzip.jpg"
+  },
+  {
+   "id": "20261112-spot-parkkyongni",
+   "title": "박경리문학공원",
+   "category": "볼거리",
+   "date": "2026-11-12",
+   "note": "원주 단구동 토지길 1, 볼타커피에서 차로 3분(1.0km)·도보 15분. 《토지》를 탈고한 박경리 작가의 2층 옛집과 텃밭·연못·정원, 북카페·전시관(문학의 집). 커피 들고 산책하기 좋은 곳.",
+   "url": "https://map.naver.com/p/search/%EB%B0%95%EA%B2%BD%EB%A6%AC%EB%AC%B8%ED%95%99%EA%B3%B5%EC%9B%90%20%EC%9B%90%EC%A3%BC",
+   "source": "found_with_pickle",
+   "tags": [
+    "원주",
+    "산책",
+    "문학",
+    "볼거리"
+   ],
+   "image": "./assets/images/20261112-spot-parkkyongni.jpg"
+  },
+  {
+   "id": "20261112-spot-miromarket",
+   "title": "미로예술 원주중앙시장 2층",
+   "category": "아이템",
+   "date": "2026-11-12",
+   "note": "원주 중앙동, 차로 10~12분·3.8km. 인센스·빈티지 컵의 '무용담 예술상점'(14시 오픈), 자체 제작 인형 '촘촘', 캐릭터 굿즈 '츄릅 토이샵' 등 청년 공방이 모인 소품샵 성지.",
+   "url": "https://map.naver.com/p/search/%EB%AF%B8%EB%A1%9C%EC%98%88%EC%88%A0%20%EC%9B%90%EC%A3%BC%EC%A4%91%EC%95%99%EC%8B%9C%EC%9E%A5",
+   "source": "found_with_pickle",
+   "tags": [
+    "원주",
+    "소품샵",
+    "공방",
+    "시장"
+   ],
+   "image": "./assets/images/20261112-spot-miromarket.jpg"
+  },
+  {
+   "id": "20261112-stay-dormyinn",
+   "title": "도미 인 프리미엄 시부야 진구마에",
+   "category": "여행·숙소",
+   "date": "2026-11-12",
+   "note": "시부야 4박 2인 기준 1박 약 163,000원부터(11-12 조회, 구글 평점 4.2). 시내에서 드문 천연온천 대욕장·사우나 무료, 매일 밤 무료 소바 야식. 미야시타 파크·하라주쿠 도보권.",
+   "url": "https://www.google.com/maps/search/?api=1&query=%EB%8F%84%EB%AF%B8%20%EC%9D%B8%20%ED%94%84%EB%A6%AC%EB%AF%B8%EC%97%84%20%EC%8B%9C%EB%B6%80%EC%95%BC%20%EC%A7%84%EA%B5%AC%EB%A7%88%EC%97%90%20Dormy%20Inn%20Premium%20Shibuya%20Jingumae",
+   "source": "found_with_pickle",
+   "tags": [
+    "도쿄",
+    "시부야",
+    "숙소",
+    "온천",
+    "12월 초 여행"
+   ],
+   "image": "./assets/images/20261112-stay-dormyinn.jpg"
+  },
+  {
+   "id": "20261112-stay-tokyustay",
+   "title": "도큐스테이 시부야 신미나미구치",
+   "category": "여행·숙소",
+   "date": "2026-11-12",
+   "note": "1박 약 163,000원부터(11-12 조회, 구글 평점 4.0). JR 시부야역 신남쪽 출구 도보 2~3분, 전 객실 세탁기·건조기·전자레인지 구비로 4박 연박에 실속.",
+   "url": "https://www.google.com/maps/search/?api=1&query=%EB%8F%84%ED%81%90%EC%8A%A4%ED%85%8C%EC%9D%B4%20%EC%8B%9C%EB%B6%80%EC%95%BC%20%EC%8B%A0%EB%AF%B8%EB%82%98%EB%AF%B8%EA%B5%AC%EC%B9%98%20Tokyu%20Stay%20Shibuya%20Shin-Minamiguchi",
+   "source": "found_with_pickle",
+   "tags": [
+    "도쿄",
+    "시부야",
+    "숙소",
+    "세탁기",
+    "12월 초 여행"
+   ],
+   "image": "./assets/images/20261112-stay-tokyustay.jpg"
+  },
+  {
+   "id": "20261112-stay-shibuyagranbell",
+   "title": "시부야 그랑벨 호텔",
+   "category": "여행·숙소",
+   "date": "2026-11-12",
+   "note": "1박 약 174,000원부터(11-12 조회, 구글 평점 4.0). JR 시부야역 서쪽/신남쪽 출구 도보 3분, 사쿠라가오카 방면 디자이너 부티크 호텔. 트렌디한 인테리어와 투숙객 무료 라운지 커피.",
+   "url": "https://www.google.com/maps/search/?api=1&query=%EC%8B%9C%EB%B6%80%EC%95%BC%20%EA%B7%B8%EB%9E%91%EB%B2%A8%20%ED%98%B8%ED%85%94%20SHIBUYA%20GRANBELL%20HOTEL",
+   "source": "found_with_pickle",
+   "tags": [
+    "도쿄",
+    "시부야",
+    "숙소",
+    "부티크",
+    "12월 초 여행"
+   ],
+   "image": "./assets/images/20261112-stay-shibuyagranbell.jpg"
+  },
+  {
+   "id": "20261111-food-ichihashi",
+   "title": "야키니쿠 이치하시 (焼肉いちはし)",
+   "category": "맛집",
+   "date": "2026-11-11",
+   "note": "벳푸역 동쪽 출구 도보 6분. 구글 평점 4.9(리뷰 430여 개)로 벳푸 시내 1위. 최상급 와규와 세심한 접객의 숯불 야키니쿠.",
+   "url": "https://www.google.com/maps/search/?api=1&query=%E7%84%BC%E8%82%89%E3%81%84%E3%81%A1%E3%81%AF%E3%81%97%20%E5%88%A5%E5%BA%9C",
+   "source": "found_with_pickle",
+   "tags": [
+    "일본",
+    "벳푸",
+    "야키니쿠",
+    "와규"
+   ],
+   "image": "./assets/images/20261111-food-ichihashi.jpg"
+  },
+  {
+   "id": "20261111-food-arata",
+   "title": "야키니쿠 아라타 (焼肉 新)",
+   "category": "맛집",
+   "date": "2026-11-11",
+   "note": "벳푸역 동쪽 출구 도보 6분. 구글 평점 4.6(리뷰 240여 개), 미슐랭 가이드 수록 와규 맛집. 특제 마늘볶음밥·오이무침이 필수 사이드.",
+   "url": "https://www.google.com/maps/search/?api=1&query=%E7%84%BC%E8%82%89%20%E6%96%B0%20%E9%98%BF%E8%89%AF%E7%94%B0%20%E5%88%A5%E5%BA%9C",
+   "source": "found_with_pickle",
+   "tags": [
+    "일본",
+    "벳푸",
+    "야키니쿠",
+    "미슐랭"
+   ],
+   "image": "./assets/images/20261111-food-arata.jpg"
+  },
+  {
+   "id": "20261111-food-toyotsune",
+   "title": "토요츠네 본점 (とよ常 本店)",
+   "category": "맛집",
+   "date": "2026-11-11",
+   "note": "벳푸역 동쪽 출구 도보 8분. 구글 평점 4.2(리뷰 4,800여 개). 1926년 창업한 벳푸 대표 대중식당 — 특제 단짠 소스 텐동과 오이타 향토 토리텐 정식.",
+   "url": "https://www.google.com/maps/search/?api=1&query=%E3%81%A8%E3%82%88%E5%B8%B8%20%E6%9C%AC%E5%BA%97%20%E5%88%A5%E5%BA%9C",
+   "source": "found_with_pickle",
+   "tags": [
+    "일본",
+    "벳푸",
+    "텐동",
+    "노포"
+   ],
+   "image": "./assets/images/20261111-food-toyotsune.jpg"
+  },
+  {
+   "id": "20261111-item-pawrug",
+   "title": "웜그레이테일 포 러그 (PAW RUG)",
+   "category": "아이템",
+   "date": "2026-11-11",
+   "note": "인스타 릴스(@zozo_house_ '122m² K-House in Seoul, Dog Edition') 속 침대 밑 러그. 140×45cm 롱 러너, 폴리에스터 100%, 벨기에 반데빌레 자카드 제직, 15mm 파일, 논슬립 아크릴 코팅. 정가 95,000원. 직기 특성상 발바닥 무늬 방향(좌/우) 랜덤 발송.",
+   "url": "https://warmgreytail.com/product/%ED%8F%AC-%EB%9F%AC%EA%B7%B8-paw-rug/1661/",
+   "source": "shared_by_user",
+   "tags": [
+    "인테리어",
+    "러그",
+    "반려견",
+    "릴스",
+    "이미지검색"
+   ],
+   "image": "./assets/images/20261111-item-pawrug.jpg"
+  },
+  {
+   "id": "20261108-food-97deg",
+   "title": "97도씨해물칼국수 영종본점",
+   "category": "맛집",
+   "date": "2026-11-08",
+   "note": "영종진광장로 39 — 묵었던 씨글로우 우드 리트릿(영종진광장로 32) 바로 맞은편 도보 1분(70m). 맑고 시원한 조개 육수와 부산오징어튀김 부추전. 테이블링 대기 가능.",
+   "url": "https://map.naver.com/p/search/97%EB%8F%84%EC%94%A8%ED%95%B4%EB%AC%BC%EC%B9%BC%EA%B5%AD%EC%88%98%20%EC%98%81%EC%A2%85%EB%B3%B8%EC%A0%90",
+   "source": "found_with_pickle",
+   "tags": [
+    "영종도",
+    "칼국수",
+    "해물",
+    "숙소근처"
+   ],
+   "image": "./assets/images/20261108-food-97deg.jpg"
+  },
+  {
+   "id": "20261108-food-gorae",
+   "title": "고래해물칼국수",
+   "category": "맛집",
+   "date": "2026-11-08",
+   "note": "은하수로 43, 구읍뱃터에서 차로 2분·도보 7분. 백합·가리비·새우가 푸짐한 깔끔한 해물칼국수와 바삭한 해물파전·갈비만두. 매장이 넓고 쾌적.",
+   "url": "https://map.naver.com/p/search/%EA%B3%A0%EB%9E%98%ED%95%B4%EB%AC%BC%EC%B9%BC%EA%B5%AD%EC%88%98%20%EC%98%81%EC%A2%85%EB%8F%84",
+   "source": "found_with_pickle",
+   "tags": [
+    "영종도",
+    "칼국수",
+    "해물",
+    "구읍뱃터"
+   ],
+   "image": "./assets/images/20261108-food-gorae.jpg"
+  },
+  {
+   "id": "20261108-food-hwanghae",
+   "title": "황해해물칼국수 2호점",
+   "category": "맛집",
+   "date": "2026-11-08",
+   "note": "마시란로 37, 마시안해변 쪽으로 차로 약 25분. 영종도 부동의 1위 전국구 성지 — 황태 베이스의 뽀얗고 진한 조개 육수에 산더미 해물과 조랭이떡.",
+   "url": "https://map.naver.com/p/search/%ED%99%A9%ED%95%B4%ED%95%B4%EB%AC%BC%EC%B9%BC%EA%B5%AD%EC%88%98%202%ED%98%B8%EC%A0%90%20%EC%98%81%EC%A2%85%EB%8F%84",
+   "source": "found_with_pickle",
+   "tags": [
+    "영종도",
+    "칼국수",
+    "해물",
+    "성지"
+   ],
+   "image": "./assets/images/20261108-food-hwanghae.jpg"
+  },
+  {
+   "id": "20261108-cafe-ginosko",
+   "title": "송도 기노스코",
+   "category": "카페",
+   "date": "2026-11-08",
+   "note": "인천대교를 건너자마자 들르는 지점(영종도에서 30분·귀가까지 54분). 일요일 12시 오픈이라 체크아웃 후 바로 방문하기 좋음. 시그니처 헤비화이트와 정교한 필터커피, 블루리본 스페셜티 로스터리.",
+   "url": "https://map.naver.com/p/search/%EA%B8%B0%EB%85%B8%EC%8A%A4%EC%BD%94%20%EC%86%A1%EB%8F%84",
+   "source": "found_with_pickle",
+   "tags": [
+    "영종도",
+    "귀가길",
+    "스페셜티",
+    "블루리본"
+   ],
+   "image": "./assets/images/20261108-cafe-ginosko.jpg"
+  },
+  {
+   "id": "20261108-cafe-greenflag",
+   "title": "그린플래그커피 (의왕)",
+   "category": "카페",
+   "date": "2026-11-08",
+   "note": "영종도에서 46분·귀가까지 35분, 귀가길 정중앙. 백운호수가 내려다보이는 목조 통창과 잔디 정원, 원두 선택 가능.",
+   "url": "https://map.naver.com/p/search/%EA%B7%B8%EB%A6%B0%ED%94%8C%EB%9E%98%EA%B7%B8%EC%BB%A4%ED%94%BC%20%EC%9D%98%EC%99%95",
+   "source": "found_with_pickle",
+   "tags": [
+    "영종도",
+    "귀가길",
+    "호수뷰",
+    "정원"
+   ],
+   "image": "./assets/images/20261108-cafe-greenflag.jpg"
+  },
+  {
+   "id": "20261108-cafe-ledetour",
+   "title": "르디투어 (수원 광교)",
+   "category": "카페",
+   "date": "2026-11-08",
+   "note": "동수원IC 인근, 영종도에서 57분·집 도착 25분 전. 곽희수 건축가가 설계한 노출 콘크리트 계단식 대형 카페. 스페셜티 펠트커피 원두와 이흥용 제과명장 베이커리.",
+   "url": "https://map.naver.com/p/search/%EB%A5%B4%EB%94%94%ED%88%AC%EC%96%B4%20%EA%B4%91%EA%B5%90",
+   "source": "found_with_pickle",
+   "tags": [
+    "영종도",
+    "귀가길",
+    "건축",
+    "베이커리"
+   ],
+   "image": "./assets/images/20261108-cafe-ledetour.jpg"
+  },
+  {
+   "id": "20261026-stay-oceansoleview",
+   "title": "오션솔레뷰 호텔",
+   "category": "여행·숙소",
+   "date": "2026-10-26",
+   "note": "구읍뱃터 조개구이 거리 바로 앞(도보 1분). 전 객실 테라스 오션뷰·넷플릭스 지원, 11-07 1박 약 20.8만 원(10-26 조회). 당시 추천 1순위.",
+   "url": "https://www.google.com/maps/search/?api=1&query=%EC%98%A4%EC%85%98%EC%86%94%EB%A0%88%EB%B7%B0%20%ED%98%B8%ED%85%94%20%EC%9D%B8%EC%B2%9C%20%EC%98%81%EC%A2%85%EB%8F%84",
+   "source": "found_with_pickle",
+   "tags": [
+    "영종도",
+    "숙소",
+    "오션뷰",
+    "조개구이"
+   ],
+   "image": "./assets/images/20261026-stay-oceansoleview.jpg"
+  },
+  {
+   "id": "20261026-stay-westerngrace",
+   "title": "웨스턴그레이스호텔",
+   "category": "여행·숙소",
+   "date": "2026-10-26",
+   "note": "구읍뱃터 바다 바로 앞 통창 파노라마 오션뷰, 11-07 1박 약 13만 원대로 후보 중 가장 저렴(10-26 조회).",
+   "url": "https://www.google.com/maps/search/?api=1&query=%EC%9B%A8%EC%8A%A4%ED%84%B4%EA%B7%B8%EB%A0%88%EC%9D%B4%EC%8A%A4%ED%98%B8%ED%85%94%20%EC%98%81%EC%A2%85%EB%8F%84",
+   "source": "found_with_pickle",
+   "tags": [
+    "영종도",
+    "숙소",
+    "오션뷰",
+    "가성비"
+   ],
+   "image": "./assets/images/20261026-stay-westerngrace.jpg"
+  },
+  {
+   "id": "20261026-stay-theweekand",
+   "title": "더위크앤 리조트",
+   "category": "여행·숙소",
+   "date": "2026-10-26",
+   "note": "을왕리 해수욕장 도보 5분, 감각적인 4성급 라이프스타일 리조트. 11-07 1박 약 24.3만 원대(10-26 조회), 깔끔한 룸 컨디션과 일몰 감성.",
+   "url": "https://www.google.com/maps/search/?api=1&query=%EB%8D%94%EC%9C%84%ED%81%AC%EC%95%A4%20%EB%A6%AC%EC%A1%B0%ED%8A%B8%20%EC%9D%B8%EC%B2%9C%20%EC%9D%84%EC%99%95%EB%A6%AC",
+   "source": "found_with_pickle",
+   "tags": [
+    "영종도",
+    "숙소",
+    "리조트",
+    "을왕리"
+   ],
+   "image": "./assets/images/20261026-stay-theweekand.jpg"
+  }
+ ]
+}
