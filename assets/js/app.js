@@ -116,7 +116,7 @@
   var GH_LS_TOKEN = 'gh_token';
   var GH_LS_REPO = 'gh_repo';
   var GH_LS_DEL = 'yejiArchive:v3:deleted';
-  var GH_MAX_BYTES = 8 * 1024 * 1024;
+  var GH_MAX_BYTES = 20 * 1024 * 1024;
 
   var ghToken = '';
   var ghRepo = GH_DEFAULT_REPO;
